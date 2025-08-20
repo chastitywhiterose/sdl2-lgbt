@@ -37,18 +37,6 @@ void ttf_print(char *text,int x,int y)
  SDL_FreeSurface(text_surface);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 void ttf_print_wrapped(char *text,int x,int y)
 {
  /*text_surface=TTF_RenderText_Solid_Wrapped(font, text, font_color,width);*/
@@ -57,16 +45,10 @@ void ttf_print_wrapped(char *text,int x,int y)
 
  /*text_surface=TTF_RenderText_Shaded_Wrapped(font, text, font_color,back_color,width);*/
 
- w=text_surface->w;
+  w=text_surface->w;
  h=text_surface->h;
 
  /*printf("Actual surface size is w=%d,h=%d\n",w,h);*/
-
- if(text_surface != NULL)
- {
-  text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
-  SDL_FreeSurface(text_surface);
- }
 
  srcrect.x=0;
  srcrect.y=0;
@@ -77,10 +59,9 @@ void ttf_print_wrapped(char *text,int x,int y)
  dstrect.x=x;
  dstrect.y=y;
 
- SDL_RenderCopy(renderer, text_texture, &srcrect, &dstrect);
-
- /*free the memory and delete the texture*/
- SDL_DestroyTexture(text_texture);
+ SDL_BlitSurface(text_surface,&srcrect,surface,&dstrect);
+ /*free the surface because we have drawn it and are done with it*/
+ SDL_FreeSurface(text_surface);
 }
 
 
