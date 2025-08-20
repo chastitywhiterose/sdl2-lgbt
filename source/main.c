@@ -24,33 +24,23 @@ int x,y,w,h;
 /*variables for SDL_ttf features*/
 char text[0x1000];
 TTF_Font *font=NULL;
-int font_size=60;
+int font_size=40;
 char font_filename[256];
 int renderstyle=TTF_STYLE_NORMAL;
 SDL_Color font_color={0,0,0,255},back_color={128,128,128,255};
 SDL_Surface *text_surface;
 SDL_Texture *text_texture;
 SDL_Rect srcrect,dstrect;
-
-#include "sdl2_ttf-lgbt-surface.h"
+SDL_Rect rect;
 
 int fps=60; /*frames per second*/
-
 int frame=0,lastframe=0,delay,framelimit=1; /*only used for animation demos*/
 time_t time0,time1;
 int seconds,minutes,hours; /*to keep track of time*/
 int sdl_time,sdl_time1;
 
-char gamename[256];
-int blocks_used=7;
-SDL_Rect rect;
+#include "sdl2_ttf-lgbt-surface.h"
 
-char movetext[256],move_id;
-int text_x; /*the x position of where text will go*/
-
-FILE *fp; /*to save a file of moves played*/
-char filename[256]; /*name of move log file*/
-FILE *fp_input; /*file to get input from instead of the keyboard*/
 
 int main(int argc, char **argv)
 {
@@ -116,7 +106,8 @@ int main(int argc, char **argv)
  strcpy(text,"Chastity White Rose");
 
 font_color.r=0;font_color.g=0;font_color.b=0;
-ttf_test();
+ttf_test4();
+
 /*
 font_color.r=255;font_color.g=255;font_color.b=255;
 ttf_test2();

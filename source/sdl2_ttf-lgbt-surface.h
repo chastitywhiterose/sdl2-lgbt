@@ -81,8 +81,7 @@ void ttf_print_wrapped(char *text,int x,int y)
 
 void ttf_test()
 {
- SDL_SetRenderDrawColor(renderer,255,255,255,255);
- SDL_RenderClear(renderer);
+ SDL_FillRect(surface,NULL,0xFFFFFF);
 
  ttf_print("Chastity White Rose",0,0);
  ttf_print("The Vegan Virgin",0,font_size*1);
@@ -115,13 +114,12 @@ void ttf_test()
 void ttf_test2()
 {
 
- SDL_SetRenderDrawColor(renderer,0,0,0,255);
- SDL_RenderClear(renderer);
+ SDL_FillRect(surface,NULL,0x000000);
 
  ttf_print_wrapped("I am Chastity White Rose, the Vegan Virgin! I am the creator of the video games Chaste Tris, Chaste Puyo, and Chaste Panel.",0,0);
 
 
- SDL_RenderPresent(renderer);
+ SDL_UpdateWindowSurface(window);
 
  loop=1;
  while(loop)
@@ -143,13 +141,12 @@ void ttf_test2()
 void ttf_test3()
 {
 
- SDL_SetRenderDrawColor(renderer,0,0,0,255);
- SDL_RenderClear(renderer);
+ SDL_FillRect(surface,NULL,0x000000);
 
  ttf_print_wrapped("Light\nGraphics\nBinary\nText",0,0);
 
 
- SDL_RenderPresent(renderer);
+ SDL_UpdateWindowSurface(window);
 
  loop=1;
  while(loop)
@@ -166,3 +163,52 @@ void ttf_test3()
 
 }
 
+/*animation of frame number*/
+void ttf_test4()
+{
+ delay=1000/fps;
+
+ loop=1;
+ while(loop)
+ {
+
+/*drawing section begin*/
+ SDL_FillRect(surface,NULL,0xFFFFFF);
+
+ ttf_print("Chastity White Rose",0,0);
+ ttf_print("The Vegan Virgin",0,font_size*1);
+
+ sprintf(text,"frame: %d <-- this number changes every frame!",frame);
+ frame++;
+
+ ttf_print(text,0,font_size*3);
+
+ ttf_print_wrapped("This program is the prototype of my library LGBT:\n\nLight Graphics Binary Text",0,font_size*5);
+
+ ttf_print_wrapped("Text using SDL_ttf for extremely gay programmers",0,font_size*10);
+
+ SDL_UpdateWindowSurface(window);
+
+
+  /*drawing section end*/
+
+  sdl_time = SDL_GetTicks();
+  sdl_time1 = sdl_time+delay;
+
+  /*time loop used to slow the game down so users can see it*/
+  while(loop==1 && sdl_time<sdl_time1)
+  {
+   sdl_time=SDL_GetTicks();
+  }
+
+  while(SDL_PollEvent(&e))
+  {
+   if(e.type == SDL_QUIT){loop=0;}
+   if(e.type == SDL_KEYUP)
+   {
+    if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+   }
+  }
+ }
+
+}
