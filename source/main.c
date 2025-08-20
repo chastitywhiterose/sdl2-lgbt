@@ -11,7 +11,8 @@ int width=1280,height=720;
 int loop=1;
 int Window_Flags=0;
 SDL_Window *window;
-SDL_Renderer *renderer;
+SDL_Surface *surface;
+SDL_Renderer *renderer; /*not used in this version. I changed to surfaces*/
 SDL_Event e;
 
 /*variables for SDL_image features*/
@@ -31,7 +32,7 @@ SDL_Surface *text_surface;
 SDL_Texture *text_texture;
 SDL_Rect srcrect,dstrect;
 
-#include "sdl2_ttf-lgbt.h"
+#include "sdl2_ttf-lgbt-surface.h"
 
 int fps=60; /*frames per second*/
 
@@ -63,16 +64,25 @@ int main(int argc, char **argv)
  }
  window=SDL_CreateWindow("SDL2 LGBT",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height,SDL_WINDOW_SHOWN );
  if(window==NULL){printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
- renderer = SDL_CreateRenderer(window,-1,0);
- if(renderer==NULL){printf( "Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
+
+ surface = SDL_GetWindowSurface( window ); /*get surface for this window*/
+
+ /*create a renderer that can draw to the surface*/
+ renderer=SDL_CreateSoftwareRenderer(surface);
+ if(renderer==NULL){printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
 
  printf("SDL Program Compiled Correctly\n");
 
+ SDL_FillRect(surface,NULL,0xFF00FF);
+ SDL_UpdateWindowSurface(window);
+
  /*fill entire screen with current draw color*/
+ /*
  SDL_SetRenderDrawColor(renderer,255,255,255,255);
  SDL_RenderClear(renderer);
+ SDL_RenderPresent(renderer);
+ */
 
-  SDL_RenderPresent(renderer);
  
  /* Initialize the TTF library */
  if(TTF_Init() < 0)
@@ -107,12 +117,14 @@ int main(int argc, char **argv)
 
 font_color.r=0;font_color.g=0;font_color.b=0;
 ttf_test();
+/*
 font_color.r=255;font_color.g=255;font_color.b=255;
 ttf_test2();
 font_color.r=0;font_color.g=255;font_color.b=255;
 ttf_test3();
+*/
 
- loop=1;
+ loop=0;
  while(loop)
  {
   while(SDL_PollEvent(&e))

@@ -1,2 +1,6 @@
-Linux_SDL_1989:
-	gcc -Wall -ansi -pedantic main.c -o main `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm && ./main
+Linux_SDL2-ttf:
+	gcc -Wall -ansi -pedantic main.c -o main `sdl2-config --cflags --libs` -lSDL2_ttf && ./main
+push:
+	git add .
+	git commit # -m "Code Cookbook Update"
+	git push
