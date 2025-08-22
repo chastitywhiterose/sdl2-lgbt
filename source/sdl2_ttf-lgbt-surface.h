@@ -21,7 +21,7 @@ void ttf_print(char *text,int x,int y)
  w=text_surface->w;
  h=text_surface->h;
 
- /*printf("Actual surface size is w=%d,h=%d\n",w,h);*/
+ printf("Actual surface size is w=%d,h=%d\n",w,h);
 
  srcrect.x=0;
  srcrect.y=0;
@@ -66,12 +66,49 @@ void ttf_print_wrapped(char *text,int x,int y)
 
 
 
+char master_chars[0x1000];
+
+void std_master_chars()
+{
+ char *s=master_chars;
+ int x=32;y=127;
 
 
+ while(x<y)
+ {
+  /*printf("%d == %c\n",x,x);*/
+  *s++=x;
+  x++;
+ }
+ *s=0;
+
+}
 
 
+void ttf_master_chars()
+{
+ SDL_FillRect(surface,NULL,0xFFFFFF);
 
+ TTF_SetFontSize(font,20); /*can change font size any time!*/
 
+ ttf_print(master_chars,0,0);
+
+ SDL_UpdateWindowSurface(window);
+
+ loop=1;
+ while(loop)
+ {
+  while(SDL_PollEvent(&e))
+  {
+   if(e.type == SDL_QUIT){loop=0;}
+   if(e.type == SDL_KEYUP)
+   {
+    if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+   }
+  }
+ }
+
+}
 
 
 

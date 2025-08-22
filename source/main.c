@@ -106,7 +106,11 @@ int main(int argc, char **argv)
  strcpy(text,"Chastity White Rose");
 
 font_color.r=0;font_color.g=0;font_color.b=0;
-ttf_test4();
+
+std_master_chars();
+ttf_master_chars();
+
+/*ttf_test4();*/
 
 /*
 font_color.r=255;font_color.g=255;font_color.b=255;
