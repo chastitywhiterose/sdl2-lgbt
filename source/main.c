@@ -113,7 +113,7 @@ int main(int argc, char **argv)
  /*it is important to initialize the rainbow*/
  chaste_palette_rainbow(40);
  /*chaste_palette_rainbow_pastel(80);*/
- chaste_palette_view();
+ /*chaste_palette_view();*/
 
 font_color.r=255;font_color.g=255;font_color.b=255;
 
