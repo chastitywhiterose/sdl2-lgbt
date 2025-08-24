@@ -24,7 +24,7 @@ int x,y,w,h;
 /*variables for SDL_ttf features*/
 char text[0x1000];
 TTF_Font *font=NULL;
-int font_size=20;
+int font_size=40;
 char font_filename[256];
 int renderstyle=TTF_STYLE_NORMAL;
 SDL_Color font_color={0,0,0,255},back_color={128,128,128,255};
@@ -136,6 +136,22 @@ ttf_test3();
  loop=0;
  while(loop)
  {
+
+
+
+  /*drawing section end*/
+
+  sdl_time = SDL_GetTicks();
+  sdl_time1 = sdl_time+delay;
+
+  /*time loop used to slow the game down so users can see it*/
+  while(loop==1 && sdl_time<sdl_time1)
+  {
+   sdl_time=SDL_GetTicks();
+  }
+
+
+
   while(SDL_PollEvent(&e))
   {
    if(e.type == SDL_QUIT){loop=0;}
