@@ -288,13 +288,13 @@ void test_new_lgbt()
 
 
  /*drawing section begin*/
- SDL_FillRect(surface,NULL,0x7f7f7f);
+ SDL_FillRect(surface,NULL,0x000000);
 
  chaste_palette_index=chaste_palette_index1;
 
- lgbt_draw_text("This program is the prototype of my library LGBT:\n\nLight Graphics Binary Text",0,0,1);
+ lgbt_draw_text("This program is the prototype of my library LGBT:\n\n           Light Graphics Binary Text",0,0,1);
 
- lgbt_draw_text_gay("Text using SDL_ttf for extremely gay programmers",0,font_size*5,1);
+ lgbt_draw_text_gay("Chaste\nthe\nRainbow",font_size*10,font_size*5,3);
 
  chaste_palette_index1++;
  if(chaste_palette_index1>=chaste_palette_length)
