@@ -248,6 +248,8 @@ void lgbt_draw_text_gay(const char *s,int cx,int cy,int scale)
       SDL_RenderFillRect(renderer,&rect_dest);*/
 
 SDL_FillRect(surface,&rect_dest,pixel);
+
+chaste_next_color();
       
      }
      
@@ -277,17 +279,44 @@ SDL_FillRect(surface,&rect_dest,pixel);
 
 void test_new_lgbt()
 {
- SDL_FillRect(surface,NULL,0x7f7f7f);
+ delay=1000/fps;
 
- lgbt_draw_text("This program is the prototype of my library LGBT:\n\nLight Graphics Binary Text",0,0,1);
-
- lgbt_draw_text("Text using SDL_ttf for extremely gay programmers",0,font_size*10,1);
-
- SDL_UpdateWindowSurface(window);
 
  loop=1;
  while(loop)
  {
+
+
+ /*drawing section begin*/
+ SDL_FillRect(surface,NULL,0x7f7f7f);
+
+ chaste_palette_index=chaste_palette_index1;
+
+ lgbt_draw_text("This program is the prototype of my library LGBT:\n\nLight Graphics Binary Text",0,0,1);
+
+ lgbt_draw_text_gay("Text using SDL_ttf for extremely gay programmers",0,font_size*5,1);
+
+ chaste_palette_index1++;
+ if(chaste_palette_index1>=chaste_palette_length)
+ {
+  chaste_palette_index1=0;
+ }
+
+ SDL_UpdateWindowSurface(window);
+
+ /*drawing section end*/
+
+  sdl_time = SDL_GetTicks();
+  sdl_time1 = sdl_time+delay;
+
+  /*time loop used to slow the game down so users can see it*/
+  while(loop==1 && sdl_time<sdl_time1)
+  {
+   sdl_time=SDL_GetTicks();
+  }
+
+
+
   while(SDL_PollEvent(&e))
   {
    if(e.type == SDL_QUIT){loop=0;}
