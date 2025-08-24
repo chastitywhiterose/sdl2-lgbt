@@ -39,6 +39,8 @@ time_t time0,time1;
 int seconds,minutes,hours; /*to keep track of time*/
 int sdl_time,sdl_time1;
 
+#include "chaste_the_rainbow.h"
+
 #include "sdl2_ttf-lgbt-surface.h"
 
 #include "sdl2_ttf-lgbt-surface-draw.h"
