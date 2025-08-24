@@ -3,6 +3,7 @@
 struct lgbt
 {
  Uint32 width,height,bpp;
+ Uint32 char_width,char_height;
  Uint32 *pixels;
 };
 
@@ -32,7 +33,11 @@ struct lgbt lgbt_load_ttf_surface(const char *s)
  new_lgbt.height=temp_surface1->h;
  new_lgbt.bpp=32;
 
+ new_lgbt.char_width=new_lgbt.width/95;
+ new_lgbt.char_height=new_lgbt.height;
+
  printf("new_lgbt width=%d height=%d bpp=%d\n",new_lgbt.width,new_lgbt.height,new_lgbt.bpp);
+ printf("Size of each character is %d,%d\n",new_lgbt.char_width,new_lgbt.char_height);
 
  new_lgbt.pixels=(uint32_t*)malloc((new_lgbt.width*new_lgbt.height)*sizeof(*new_lgbt.pixels));
  if(new_lgbt.pixels==NULL){printf("Error: malloc failed,\n");}
@@ -75,12 +80,12 @@ void lgbt_draw_text(const char *s,int cx,int cy,int scale)
 {
  int x,y,i,c,cx_start=cx;
  int sx,sy,sx2,sy2,dx,dy; /*x,y coordinates for both source and destination*/
- Uint32 pixel,r,g,b; /*pixel that will be read from*/
+ Uint32 pixel/*,r,g,b*/; /*pixel that will be read from*/
  SDL_Rect rect_source,rect_dest;
- int char_width=main_lgbt.width/95; /*there are 95 characters in my font files*/
- int char_height=main_lgbt.height;
+ int char_width=main_lgbt.char_width; /*there are 95 characters in my font files*/
+ int char_height=main_lgbt.char_height;
 
- printf("Size of loaded font is %d,%d\n",char_width,char_height);
+ /*printf("Size of each character is %d,%d\n",char_width,char_height);*/
 
  if(main_lgbt.pixels==NULL){/*printf("Error: Font is NULL!\n");*/return;}
 
@@ -129,10 +134,12 @@ void lgbt_draw_text(const char *s,int cx,int cy,int scale)
       
       pixel=main_color;
       
+      /*  
       r=(pixel&0xFF0000)>>16;
       g=(pixel&0x00FF00)>>8;
       b=(pixel&0x0000FF);
-      
+      */
+   
       /*SDL_SetRenderDrawColor(renderer,r,g,b,255);
       SDL_RenderFillRect(renderer,&rect_dest);*/
 

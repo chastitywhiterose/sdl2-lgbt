@@ -109,6 +109,12 @@ int main(int argc, char **argv)
 
  strcpy(text,"Chastity White Rose");
 
+
+ /*it is important to initialize the rainbow*/
+ chaste_palette_rainbow(40);
+ /*chaste_palette_rainbow_pastel(80);*/
+ chaste_palette_view();
+
 font_color.r=255;font_color.g=255;font_color.b=255;
 
 std_master_chars(); /*generate the standard 95 characters, starting with space*/
