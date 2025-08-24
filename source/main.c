@@ -24,7 +24,7 @@ int x,y,w,h;
 /*variables for SDL_ttf features*/
 char text[0x1000];
 TTF_Font *font=NULL;
-int font_size=40;
+int font_size=20;
 char font_filename[256];
 int renderstyle=TTF_STYLE_NORMAL;
 SDL_Color font_color={0,0,0,255},back_color={128,128,128,255};
@@ -40,6 +40,8 @@ int seconds,minutes,hours; /*to keep track of time*/
 int sdl_time,sdl_time1;
 
 #include "sdl2_ttf-lgbt-surface.h"
+
+#include "sdl2_ttf-lgbt-surface-draw.h"
 
 
 int main(int argc, char **argv)
@@ -105,10 +107,14 @@ int main(int argc, char **argv)
 
  strcpy(text,"Chastity White Rose");
 
-font_color.r=0;font_color.g=0;font_color.b=0;
+font_color.r=255;font_color.g=255;font_color.b=255;
 
-std_master_chars();
-ttf_master_chars();
+std_master_chars(); /*generate the standard 95 characters, starting with space*/
+/*ttf_master_chars();*/ /*run the test demo with SDL_TTF to see the characters on the screen*/
+
+font_color.r=255;font_color.g=255;font_color.b=255;
+main_lgbt=lgbt_load_ttf_surface(master_chars);
+test_new_lgbt();
 
 /*ttf_test4();*/
 
